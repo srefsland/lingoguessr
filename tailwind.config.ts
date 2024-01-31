@@ -13,6 +13,16 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontWeight: {
+        "extrablack": "1000",
+      },
+      colors: {
+        "lightblue": "lightblue",
+        "lightyellow": "lightyellow",
+      },
+      scale: {
+        "103": "1.03",
+      }
     },
   },
   plugins: [],
