@@ -22,10 +22,15 @@ export async function createGame() {
     const combinedIds = data.map((languageSample: any) => languageSample._id.toString());
     const combinedIdsString = combinedIds.join("");
     const gameId = createGameId(combinedIdsString);
+    const dateCreated = new Date();
+    const dateModfied = new Date();
 
     await db.collection("generalGame").findOneAndUpdate(
         { gameId: gameId },
-        { $setOnInsert: { gameId, languageSampleIds: combinedIds } },
+        {
+            $set: { dateModfied },
+            $setOnInsert: { gameId, languageSampleIds: combinedIds, dateCreated }
+        },
         { upsert: true }
     );
 
@@ -36,7 +41,8 @@ export async function getGame(gameId: string) {
     const client = await clientPromise;
     const db = client.db("lingoguessr");
 
-    const game = await db.collection("generalGame").findOne({ gameId: gameId });
+    const game = await db.collection("generalGame")
+        .findOne({ gameId: gameId });
 
     if (!game) {
         throw new Error("Game not found");
@@ -45,7 +51,14 @@ export async function getGame(gameId: string) {
     const languageSampleIds = game.languageSampleIds;
     const languageSampleIdsObject = languageSampleIds.map((id: string) => new ObjectId(id));
 
-    const languageSamples = await db.collection("languageSample").find({ _id: { $in: languageSampleIdsObject } }).toArray();
+    const languageSamples = await db.collection("languageSample")
+        .find({ _id: { $in: languageSampleIdsObject } })
+        .toArray();
 
-    return languageSamples;
+    const orderedLanguageSamples = languageSampleIds.map((id: string) => {
+        const languageSample = languageSamples.find((languageSample: any) => languageSample._id.toString() === id);
+        return languageSample;
+    })
+
+    return orderedLanguageSamples;
 }

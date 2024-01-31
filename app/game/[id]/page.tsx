@@ -15,6 +15,7 @@ export default function Game({ params }: { params: { id: string } }) {
     const [score, setScore] = useState(0);
     const [isRound, setIsRound] = useState(true);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const maxScore = 5;
 
@@ -22,6 +23,7 @@ export default function Game({ params }: { params: { id: string } }) {
         loadGame(gameId).then((data) => {
             if (data) {
                 setLanguageSamples(data);
+                setIsLoading(false);
             } else {
                 redirect('/not-found');
             }
@@ -43,50 +45,58 @@ export default function Game({ params }: { params: { id: string } }) {
         setIsRound(true);
     }
 
+    const renderLoadingContent = () => {
+        return (
+            <div className="flex flex-col items-center justify-center h-full">
+                <h1 className="text-4xl">Loading...</h1>
+            </div>
+        );
+    };
+
     const renderRoundContent = () => {
-        if (isRound && roundNumber < languageSamples.length) {
-            const currentSample = languageSamples[roundNumber];
-            return (
-                <GameRoundScreen
-                    language={currentSample.language}
-                    audioUrl={currentSample.audioUrl}
-                    handleOnRoundClick={handleOnClickRound}
-                    roundNumber={roundNumber}
-                />
-            );
-        }
+        const currentSample = languageSamples[roundNumber];
+        return (
+            <GameRoundScreen
+                language={currentSample.language}
+                audioUrl={currentSample.audioUrl}
+                handleOnRoundClick={handleOnClickRound}
+                roundNumber={roundNumber}
+            />
+        );
     };
 
     const renderResultContent = () => {
-        if (!isRound && roundNumber < languageSamples.length) {
-            return (
-                <GameResultScreen
-                    isCorrect={isCorrect}
-                    handleOnClickNextRound={handleOnClickNextRound}
-                    score={score}
-                    maxScore={maxScore}
-                    roundNumber={roundNumber}
-                />
-            );
-        }
+        return (
+            <GameResultScreen
+                isCorrect={isCorrect}
+                handleOnClickNextRound={handleOnClickNextRound}
+                score={score}
+                maxScore={maxScore}
+                roundNumber={roundNumber}
+            />
+        );
     };
 
     const renderGameOverContent = () => {
-        if (roundNumber >= languageSamples.length) {
-            return (
-                <GameFinalResults
-                    score={score}
-                    maxScore={maxScore}
-                />
-            )
-        }
+        return (
+            <GameFinalResults
+                score={score}
+                maxScore={maxScore}
+            />
+        )
     };
 
-    return (
-        <>
-            {renderRoundContent()}
-            {renderResultContent()}
-            {renderGameOverContent()}
-        </>
-    );
+    let content;
+
+    if (isLoading) {
+        content = renderLoadingContent();
+    } else if (isRound && roundNumber < languageSamples.length) {
+        content = renderRoundContent();
+    } else if (!isRound && roundNumber < languageSamples.length) {
+        content = renderResultContent();
+    } else {
+        content = renderGameOverContent();
+    }
+
+    return content;
 };
