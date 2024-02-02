@@ -5,9 +5,9 @@ import GameButton from "@/components/game-button";
 import Header from "@/components/header";
 
 type GameRoundScreenProps = {
-    language: string;
-    audioUrl: string;
-    handleOnRoundClick: (isCorrect: boolean) => void;
+    language?: string;
+    audioUrl?: string;
+    handleOnRoundClick: (chosenLanguage: string) => void;
     roundNumber: number;
 }
 
@@ -20,7 +20,7 @@ export default function GameRoundScreen(props: GameRoundScreenProps) {
     }
 
     const handleOnClick = () => {
-        props.handleOnRoundClick(chosenLanguage.toLowerCase() === props.language);
+        props.handleOnRoundClick(chosenLanguage);
     }
 
     const handleOnEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
