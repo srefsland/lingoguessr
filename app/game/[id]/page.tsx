@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import GameRoundScreen from './components/round-screen';
-import GameResultScreen from './components/result-screen';
-import GameFinalResults from './components/final-results';
+import GameRoundScreen from './_components/round-screen';
+import GameResultScreen from './_components/result-screen';
+import GameFinalResults from './_components/final-results';
 import { loadGame } from '@/actions';
 import { redirect } from 'next/navigation';
 

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import GameButton from "@/components/game-button";
-import Header from "@/components/header";
+import GameButton from "@/_components/game-button";
+import Header from "@/_components/header";
 
 type GameRoundScreenProps = {
     language?: string;

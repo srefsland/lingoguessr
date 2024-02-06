@@ -1,7 +1,5 @@
-"use client";
-
-import GameButton from "@/components/game-button";
-import Header from "@/components/header";
+import GameButton from "@/_components/game-button";
+import Header from "@/_components/header";
 
 type GameResultProps = {
     isCorrect: boolean;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import Header from '@/components/header';
+import Header from '@/_components/header';
 
 type GameFinalResultsProps = {
     score: number;

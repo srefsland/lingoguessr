@@ -1,4 +1,4 @@
-import clientPromise from "@/lib/mongodb";
+import clientPromise from "@/_lib/mongodb";
 import { md5 } from "js-md5";
 import { ObjectId } from "mongodb";
 

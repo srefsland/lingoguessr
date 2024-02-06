@@ -1,5 +1,5 @@
-import GameButton from "@/components/game-button";
-import GameButtonLink from "@/components/game-link-button";
+import GameButton from "@/_components/game-button";
+import GameButtonLink from "@/_components/game-link-button";
 import Image from "next/image";
 import { createNewGame } from "@/actions";
 
