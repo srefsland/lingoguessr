@@ -5,11 +5,11 @@ import GameRoundScreen from "./_components/round-screen";
 import GameResultScreen from "./_components/result-screen";
 import GameFinalResults from "./_components/final-results";
 import { loadGame } from "@/app/actions";
-import { redirect } from "next/navigation";
-import { use } from "react";
+import { redirect, useParams } from "next/navigation";
 
-export default function Game({ params }: { params: { id: string } }) {
-  const { id: gameId } = use(params);
+export default function Game() {
+  const params = useParams<{ id: string }>();
+  const gameId = params.id;
 
   const [languageSamples, setLanguageSamples] = useState<LanguageSample[]>([]);
   const [currentLanguageSample, setCurrentLanguageSample] =
