@@ -8,7 +8,7 @@ import { loadGame } from "@/app/actions";
 import { redirect } from "next/navigation";
 
 export default function Game({ params }: { params: { id: string } }) {
-  const gameId = params.id;
+  const { id: gameId } = use(params);
 
   const [languageSamples, setLanguageSamples] = useState<LanguageSample[]>([]);
   const [currentLanguageSample, setCurrentLanguageSample] =
