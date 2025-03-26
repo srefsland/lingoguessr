@@ -15,8 +15,6 @@ export default function Home() {
       />
       <h1 className="m-6 text-4xl font-extrablack">LingoGuessr</h1>
       <GameButton buttonLabel="Play" handleOnClick={createNewGame} />
-      <GameButtonLink linkTo="/about" buttonLabel="About" />
-      <GameButtonLink linkTo="/help" buttonLabel="Help" />
     </div>
   );
 }

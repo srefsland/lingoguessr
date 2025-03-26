@@ -6,6 +6,7 @@ import GameResultScreen from "./_components/result-screen";
 import GameFinalResults from "./_components/final-results";
 import { loadGame } from "@/app/actions";
 import { redirect } from "next/navigation";
+import { use } from "react";
 
 export default function Game({ params }: { params: { id: string } }) {
   const { id: gameId } = use(params);
