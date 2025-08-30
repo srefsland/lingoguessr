@@ -11,7 +11,7 @@
   "dependencies": {
     "js-md5": "^0.8.3",
     "mongodb": "^6.15.0",
-    "next": "^15.2.4",
+    "next": "^15.4.7",
     "react": "^19",
     "react-dom": "^19",
     "sharp": "^0.33.5"
